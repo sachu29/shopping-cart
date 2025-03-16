@@ -10,15 +10,14 @@ const CardComponent = ({ cardData }) => {
 
   return (
     <>
-      {cardData.length > 0 ? (
+      {cardData && cardData.length > 0 ? (
         cardData.map((item) => {
           const isLiked = wishlist.some((wishItem) => wishItem.id === item.id);
           return (
             <Card
               key={item.id}
-              className="relative border"
+              className="relative border w-full md:w-52 lg:w-64"
               hoverable
-              style={{ width: 300 }}
               cover={<img alt="product" src={item.thumbnail} />}
             >
               <span

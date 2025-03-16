@@ -2,8 +2,9 @@
   import React, { useEffect, useState } from "react";
   import { Select } from "antd";
 
-  const DropdownComponent = ({ onCategoryChange }) => {
+  const DropdownComponent = ({ onChange, value }) => {
     const [selectData, setSelectData] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState(value);
 
     useEffect(() => {
       fetch("https://dummyjson.com/products/categories")
@@ -19,14 +20,24 @@
         .catch((err) => console.error("Error fetching categories:", err));
     }, []);
 
+    useEffect(() => {
+      if(!value) setSelectedCategory(null);
+    }, [value]);
+
+    const handleChange = (val) => {
+      setSelectedCategory(val);
+      onChange(val);
+    }
+
     return (
       <Select
         showSearch
         placeholder="Select Category"
         optionFilterProp="children"
-        onChange={onCategoryChange}
+        onChange={handleChange}
         options={selectData}
         style={{ width: 200 }}
+        value={selectedCategory} 
       />
     );
   };

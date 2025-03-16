@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Layout, Menu } from "antd";
 import Link from "next/link";
 import SearchComponent from './SearchComponent';
@@ -9,6 +9,7 @@ const { Header } = Layout;
 
 const Navbar = ({ onSearch }) => {
     const pathname = usePathname();
+    const [isScrolled, setIsScrolled] = useState(false);
     
     const menuItems = [
         {
@@ -29,10 +30,27 @@ const Navbar = ({ onSearch }) => {
         },
     ];
 
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 2) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     return (
         <Layout>
-            <Header className="shadow-md px-6 py-3 flex justify-around items-center bg-light" style={{background: "white"}}>
-                <div className="text-xl font-bold text-pink-500 ">M<span className="text-black ">oBoo</span>M</div>
+            <Header className={`w-screen shadow-md px-6 py-3 flex justify-around items-center transition-all duration-200 bg-white ${isScrolled ? "fixed z-50" : "static"}`} style={{backgroundColor: "white"}}>
+                <a href="/" className="text-xl font-bold ">
+                    <span className="text-pink-500 text-2xl">M</span>
+                    <span className="text-black ">oBoo</span>
+                    <span className="text-pink-500 text-2xl">M</span>
+                </a>
                 <SearchComponent onSearch={onSearch} />
                 <Menu
                     theme="light" 
