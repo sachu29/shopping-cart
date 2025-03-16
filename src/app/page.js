@@ -3,16 +3,15 @@ import "./globals.css"
 import Navbar from "../components/Navbar";
 import Main from '../components/Main';
 import { useState, useEffect } from "react";
-import { WishlistProvider } from './../context/WishListContext'; // Import WishlistProvider
+import { WishlistProvider } from './../context/WishListContext'; 
 import Footer from './../components/Footer';
 import { fetchCategory, fetchProducts } from "./common";
 import { Pagination } from 'antd';
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [allProducts, setAllProducts] = useState([]); // Store all products
-  const [filteredProducts, setFilteredProducts] = useState([]); // Store filtered products
+  const [allProducts, setAllProducts] = useState([]); 
+  const [filteredProducts, setFilteredProducts] = useState([]); 
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(24);
@@ -24,7 +23,6 @@ export default function Home() {
 
       setAllProducts(data.products);
       setFilteredProducts(data.products);
-      // setProductsPerPage(data.limit);
       setTotalProducts(data.total);
 
       window.scrollTo({
@@ -34,8 +32,6 @@ export default function Home() {
 
     }catch(err){
       console.error(err)
-    }finally{
-      setLoading(false)
     }
   }
 
@@ -44,31 +40,6 @@ export default function Home() {
       fetchAllProducts('?limit=24&skip=0');
     }
   },[]);
-
-  useEffect(() => {
-    // if (selectedCategory) {
-    //   fetch(`https://dummyjson.com/products/category/${selectedCategory}`)
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       setFilteredProducts(data.products);
-    //     })
-    //     .catch((err) => console.error("Error fetching category products:", err));
-    // } else {
-    //   setFilteredProducts(allProducts); 
-    // }
-  }, [selectedCategory, allProducts]); // Removed `allProducts` from dependencies to avoid unnecessary re-fetching
-
-  useEffect(() => {
-    // if (searchQuery.trim() === "") {
-    //   setFilteredProducts(selectedCategory ? allProducts.filter(item => item.category === selectedCategory) : allProducts);
-    // } else {
-    //   setFilteredProducts(allProducts.filter((item) =>
-    //     item.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
-    //     (selectedCategory ? item.category === selectedCategory : true)
-    //   ));
-    // }
-  }, [searchQuery, selectedCategory, allProducts]);
-
 
   const handleSearch = async(search) => {
     

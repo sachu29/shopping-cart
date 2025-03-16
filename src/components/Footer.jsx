@@ -4,7 +4,7 @@ import { FacebookFilled, TwitterCircleFilled, InstagramFilled, GoogleCircleFille
 
 const Footer = () => {
   return (
-    <div className="container mx-auto my-8 p-4 text-gray-500">
+    <div className=" mx-auto mt-8 p-12 text-gray-500 bg-gray-200">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left Section */}
         <div>

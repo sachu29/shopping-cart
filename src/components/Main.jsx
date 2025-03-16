@@ -2,18 +2,7 @@ import React, { useEffect } from 'react'
 import DropdownComponent from '../components/DropdownComponent';
 import CardComponent from '../components/CardComponent'
 
-const Main = ({searchQuery, cardData, onCategoryChange, category}) => {
-
-
-    // const handleCategoryChange = async(search) => {
-    //    if(search) setCategory(null);
-
-    //    onCategoryChange(search);
-    // }
-
-    useEffect(() => {  
-        console.log(category)
-    },[category]);
+const Main = ({ searchQuery, cardData, onCategoryChange, category }) => {
 
     return (
         <main className='container mx-auto p-4'>
@@ -25,12 +14,11 @@ const Main = ({searchQuery, cardData, onCategoryChange, category}) => {
             <div className="mb-6">
                 <DropdownComponent onChange={onCategoryChange} value={category} />
             </div>
-            
+
             <div className="row">
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 flex-wrap">
                     <CardComponent searchQuery={searchQuery} cardData={cardData} />
                 </div>
-                
             </div>
         </main>
     )

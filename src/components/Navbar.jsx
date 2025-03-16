@@ -10,7 +10,7 @@ const { Header } = Layout;
 const Navbar = ({ onSearch }) => {
     const pathname = usePathname();
     const [isScrolled, setIsScrolled] = useState(false);
-    
+
     const menuItems = [
         {
             key: "/",
@@ -45,7 +45,7 @@ const Navbar = ({ onSearch }) => {
 
     return (
         <Layout>
-            <Header className={`w-screen shadow-md px-6 py-3 flex justify-around items-center transition-all duration-200 bg-white ${isScrolled ? "fixed z-50" : "static"}`} style={{backgroundColor: "white"}}>
+            <Header className={`w-screen shadow-md px-6 py-3 flex justify-around items-center transition-all duration-200 bg-white ${isScrolled ? "fixed z-50" : "static"}`} style={{ backgroundColor: "white" }}>
                 <a href="/" className="text-xl font-bold ">
                     <span className="text-pink-500 text-2xl">M</span>
                     <span className="text-black ">oBoo</span>
@@ -53,10 +53,9 @@ const Navbar = ({ onSearch }) => {
                 </a>
                 <SearchComponent onSearch={onSearch} />
                 <Menu
-                    theme="light" 
+                    theme="light"
                     mode="horizontal"
                     selectedKeys={[pathname]}
-                    // onClick={handleClick}
                     className="flex justify-end"
                     items={menuItems}
                 >
